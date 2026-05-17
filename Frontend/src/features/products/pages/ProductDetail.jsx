@@ -137,12 +137,12 @@ const ProductDetail = () => {
 
                             {/* Thumbnails (Vertical on Desktop, Horizontal on Mobile) */}
                             {displayImages.length > 1 && (
-                                <div className="flex flex-row md:flex-col gap-4 overflow-x-auto md:overflow-y-auto pb-2 md:pb-0 scrollbar-hide w-full md:w-20 lg:w-24 flex-shrink-0 md:max-h-[calc(100vh-200px)]">
+                                <div className="flex flex-row md:flex-col gap-4 overflow-x-auto md:overflow-y-auto pb-2 md:pb-0 scrollbar-hide w-full md:w-20 lg:w-24 shrink-0 md:max-h-[calc(100vh-200px)]">
                                     {displayImages.map((img, idx) => (
                                         <button
                                             key={idx}
                                             onClick={() => setSelectedImage(idx)}
-                                            className={`flex-shrink-0 w-20 md:w-full aspect-[4/5] overflow-hidden transition-all duration-300 ${selectedImage === idx ? 'opacity-100 ring-1 ring-[#C9A96E] ring-offset-2' : 'opacity-50 hover:opacity-100'}`}
+                                            className={`shrink-0 w-20 md:w-full aspect-4/5 overflow-hidden transition-all duration-300 ${selectedImage === idx ? 'opacity-100 ring-1 ring-[#C9A96E] ring-offset-2' : 'opacity-50 hover:opacity-100'}`}
                                             style={{ backgroundColor: '#f5f3f0', '--tw-ring-offset-color': '#fbf9f6' }}
                                         >
                                             <img
@@ -298,7 +298,7 @@ const ProductDetail = () => {
                             </div>
 
                             {/* Extra elegant details */}
-                            <div className="mt-14 space-y-4 text-[10px] uppercase tracking-[0.1em]" style={{ color: '#B5ADA3' }}>
+                            <div className="mt-14 space-y-4 text-[10px] uppercase tracking-0.1em" style={{ color: '#B5ADA3' }}>
                                 <div className="flex justify-between border-b pb-3" style={{ borderColor: '#e4e2df' }}>
                                     <span>Shipping</span>
                                     <span>Complimentary over INR 15,000</span>

@@ -182,7 +182,7 @@ const SellerProductDetails = () => {
         <section className="flex flex-col md:flex-row gap-8 mb-16">
           <div className="w-full md:w-1/2">
             {/* Gallery placeholder */}
-            <div className="w-full aspect-[4/5] bg-[#f5f3f0] overflow-hidden">
+            <div className="w-full aspect-4/5 bg-[#f5f3f0] overflow-hidden">
               {product.images && product.images.length > 0 ? (
                 <img src={product.images[ 0 ].url} alt={product.title} className="w-full h-full object-cover" />
               ) : (
@@ -309,7 +309,7 @@ const SellerProductDetails = () => {
                   {newVariant.images.length > 0 && (
                     <div className="grid grid-cols-3 gap-2 mb-4">
                       {newVariant.images.map((img, index) => (
-                        <div key={index} className="relative aspect-[4/5] bg-[#f5f3f0]">
+                        <div key={index} className="relative aspect-4/5 bg-[#f5f3f0]">
                           <img src={img.previewUrl} alt="Preview" className="w-full h-full object-cover" />
                           <button
                             onClick={() => handleRemoveImage(index)}
@@ -343,7 +343,7 @@ const SellerProductDetails = () => {
               <div className="mt-10 flex justify-end">
                 <button
                   onClick={handleAddNewVariant}
-                  className="bg-gradient-to-r from-[#745a27] to-[#c9a96e] text-[#ffffff] px-8 py-3 uppercase tracking-wider text-sm hover:opacity-90 transition-opacity cursor-pointer"
+                  className="bg-linear-to-r from-[#745a27] to-[#c9a96e] text-[#ffffff] px-8 py-3 uppercase tracking-wider text-sm hover:opacity-90 transition-opacity cursor-pointer"
                 >
                   Save Variant
                 </button>

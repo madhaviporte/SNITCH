@@ -93,7 +93,7 @@ const Dashboard = () => {
                                         onClick={() => { navigate(`/seller/product/${product._id}`) }}
                                         key={product._id} className="group cursor-pointer flex flex-col">
                                         {/* Image Container */}
-                                        <div className="aspect-[4/5] overflow-hidden mb-6" style={{ backgroundColor: '#f5f3f0' }}>
+                                        <div className="aspect-4/5 overflow-hidden mb-6" style={{ backgroundColor: '#f5f3f0' }}>
                                             <img
                                                 src={imageUrl}
                                                 alt={product.title}
