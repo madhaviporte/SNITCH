@@ -104,7 +104,11 @@ export const googleCallback = async (req, res) => {
 
     res.cookie("token", token)
 
-    res.redirect("https://snitch-gamma.vercel.app/")
+    if (user.role === "seller") {
+  res.redirect("https://snitch-gamma.vercel.app/seller/dashboard")
+} else {
+  res.redirect("https://snitch-gamma.vercel.app/")
+}
 }
 
 export const getMe = async (req, res) => {
