@@ -11,7 +11,11 @@ async function sendTokenResponse(user, res, message) {
         expiresIn: "7d"
     })
 
-    res.cookie("token", token)
+    res.cookie("token", token,{
+        httpOnly: true,
+    secure: true,
+    sameSite: "none"
+    })
 
     res.status(200).json({
         message,
@@ -102,7 +106,11 @@ export const googleCallback = async (req, res) => {
         expiresIn: "7d"
     })
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        httpOnly: true,
+    secure: true,
+    sameSite: "none"
+    })
 
     if (user.role === "seller") {
   res.redirect("https://snitch-gamma.vercel.app/seller/dashboard")

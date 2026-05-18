@@ -21,6 +21,9 @@ const Login = () => {
         e.preventDefault();
         try {
             const user = await handleLogin({ email: formData.email, password: formData.password });
+
+            const role = response?.user?.role;
+
             if (user.role == "buyer") {
                 navigate("/");
             } else if (user.role == "seller") {

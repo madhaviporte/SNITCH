@@ -20,17 +20,42 @@ const Register = () => {
         setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        await handleRegister({
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     await handleRegister({
+    //         email: formData.email,
+    //         contact: formData.contactNumber,
+    //         password: formData.password,
+    //         isSeller: formData.isSeller,
+    //         fullname: formData.fullName
+    //     });
+    //     navigate("/");
+    // };
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response = await handleRegister({
             email: formData.email,
             contact: formData.contactNumber,
             password: formData.password,
             isSeller: formData.isSeller,
             fullname: formData.fullName
         });
-        navigate("/");
-    };
+
+        const role = response?.user?.role;
+
+        if (role === "seller") {
+            navigate("/seller/dashboard");
+        } else if (role === "buyer") {
+            navigate("/");
+        }
+
+    } catch (error) {
+        console.error("Register failed", error);
+    }
+};
 
     const inputStyle = {
         color: '#1b1c1a',
