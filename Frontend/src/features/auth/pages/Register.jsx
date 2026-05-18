@@ -20,42 +20,17 @@ const Register = () => {
         setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     await handleRegister({
-    //         email: formData.email,
-    //         contact: formData.contactNumber,
-    //         password: formData.password,
-    //         isSeller: formData.isSeller,
-    //         fullname: formData.fullName
-    //     });
-    //     navigate("/");
-    // };
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-        const response = await handleRegister({
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await handleRegister({
             email: formData.email,
             contact: formData.contactNumber,
             password: formData.password,
             isSeller: formData.isSeller,
             fullname: formData.fullName
         });
-
-        const role = response?.user?.role;
-
-        if (role === "seller") {
-            navigate("/seller/dashboard");
-        } else if (role === "buyer") {
-            navigate("/");
-        }
-
-    } catch (error) {
-        console.error("Register failed", error);
-    }
-};
+        navigate("/");
+    };
 
     const inputStyle = {
         color: '#1b1c1a',
@@ -249,7 +224,7 @@ const handleSubmit = async (e) => {
                                 htmlFor="reg-isSeller"
                                 className="flex items-center gap-4 cursor-pointer group"
                             >
-                                <div className="relative flex-shrink-0">
+                                <div className="relative shrink-0">
                                     <input
                                         id="reg-isSeller"
                                         type="checkbox"
