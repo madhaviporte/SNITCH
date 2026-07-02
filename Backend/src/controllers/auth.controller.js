@@ -58,7 +58,7 @@ export const register = async (req, res) => {
         await sendTokenResponse(user, res, "User registered successfully")
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return res.status(500).json({ message: "Server error" });
     }
 }
@@ -82,9 +82,8 @@ export const login = async (req, res) => {
 }
 
 export const googleCallback = async (req, res) => {
-    const { id, displayName, emails, photos } = req.user
+    const { id, displayName, emails } = req.user
     const email = emails[ 0 ].value;
-    const profilePic = photos[ 0 ].value;
 
 
     let user = await userModel.findOne({

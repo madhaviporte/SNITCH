@@ -25,7 +25,7 @@ const Cart = () => {
     const cart = useSelector(state => state.cart)
     const { handleGetCart, handleIncrementCartItem, handleDecrementCartItem, handleRemoveCartItem, handleCreateCartOrder, handleVerifyCartOrder } = useCart()
     const navigate = useNavigate()
-    const { error, isLoading, Razorpay } = useRazorpay();
+    const { Razorpay } = useRazorpay();
     const user = useSelector(state => state.user)
 
     /* Local quantity state — key: cartItem._id, value: number */
@@ -73,7 +73,6 @@ const Cart = () => {
 
     async function handleCheckout() {
         const order = await handleCreateCartOrder()
-        console.log(order)
 
 
         const options = {

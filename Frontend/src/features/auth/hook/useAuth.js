@@ -1,4 +1,4 @@
-import { setError, setLoading, setUser } from "../state/auth.slice"
+import { setLoading, setUser } from "../state/auth.slice"
 import { register, login, getMe, logout } from "../service/auth.api"
 import { useDispatch } from "react-redux"
 
@@ -35,7 +35,7 @@ export const useAuth = () => {
             dispatch(setUser(null))
             return
             }
-            console.log(err)
+            console.error(err)
         } finally {
             dispatch(setLoading(false))
         }
@@ -46,7 +46,7 @@ export const useAuth = () => {
             await logout()
             dispatch(setUser(null))
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 

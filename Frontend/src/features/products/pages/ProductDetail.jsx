@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useParams, Link, useNavigate } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useProduct } from '../hooks/useProduct';
 import { useCart } from '../../cart/hook/useCart';
@@ -75,8 +75,6 @@ const ProductDetail = () => {
     };
 
 
-    console.log({ product, activeVariant })
-
     const availableAttributes = useMemo(() => {
         if (!product?.variants) return {};
         const attrs = {};
@@ -130,8 +128,6 @@ const ProductDetail = () => {
             </div>
         );
     }
-
-    console.log(product)
 
     // Fallbacks
     const displayImages = (activeVariant?.images && activeVariant.images.length > 0)
