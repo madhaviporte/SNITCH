@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* ── Global Responsive Helpers ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Scrollbar hide utility (used in ProductDetail thumbnail strip) */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
