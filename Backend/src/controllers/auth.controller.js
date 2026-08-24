@@ -2,6 +2,8 @@ import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken"
 import { config } from "../config/config.js";
 
+const isProduction = config.NODE_ENV === "production";
+
 
 async function sendTokenResponse(user, res, message) {
 
@@ -11,10 +13,10 @@ async function sendTokenResponse(user, res, message) {
         expiresIn: "7d"
     })
 
-    res.cookie("token", token,{
+    res.cookie("token", token, {
         httpOnly: true,
-    secure: true,
-    sameSite: "none"
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax"
     })
 
     res.status(200).json({
@@ -105,10 +107,10 @@ export const googleCallback = async (req, res) => {
         expiresIn: "7d"
     })
 
-    res.cookie("token", token,{
+    res.cookie("token", token, {
         httpOnly: true,
-    secure: true,
-    sameSite: "none"
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax"
     })
 
     res.redirect("http://localhost:5173/")
@@ -133,8 +135,8 @@ export const getMe = async (req, res) => {
 export const logout = async (req, res) => {
     res.clearCookie("token", {
         httpOnly: true,
-        secure: true,
-        sameSite: "none"
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax"
     });
     res.status(200).json({
         success: true,

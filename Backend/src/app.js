@@ -20,7 +20,6 @@ app.use(cors({
         "https://cohort-2-mocha.vercel.app",
     ],
     methods: [ "GET", "POST", "PUT", "DELETE", "PATCH" ],
-    origin: true,
     credentials: true
 }))
 
