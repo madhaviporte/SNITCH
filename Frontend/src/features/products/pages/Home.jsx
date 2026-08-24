@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useProduct } from '../hooks/useProduct';
 import { Link } from 'react-router';
@@ -10,6 +10,7 @@ const Home = () => {
     const { handleGetAllProducts } = useProduct();
 
     const navigate = useNavigate();
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     useEffect(() => {
         handleGetAllProducts();
@@ -56,7 +57,13 @@ const Home = () => {
 
                                 return (
                                     <div
-                                        onClick={() => navigate(`/product/${product._id}`)}
+                                        onClick={() => {
+                                            if (!user) {
+                                                setShowLoginModal(true);
+                                                return;
+                                            }
+                                            navigate(`/product/${product._id}`);
+                                        }}
                                         key={product._id} className="group cursor-pointer flex flex-col">
                                         {/* Image Container */}
                                         <div className="aspect-4/5 overflow-hidden mb-6" style={{ backgroundColor: '#f5f3f0' }}>
@@ -118,6 +125,95 @@ const Home = () => {
                     </span>
                 </footer>
             </div>
+
+            {/* ── Login Required Modal ── */}
+            {showLoginModal && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                    style={{ backgroundColor: 'rgba(27, 28, 26, 0.5)' }}
+                    onClick={() => setShowLoginModal(false)}
+                >
+                    <div
+                        className="relative w-full max-w-sm flex flex-col items-center text-center p-10"
+                        style={{ backgroundColor: '#fbf9f6' }}
+                        onClick={e => e.stopPropagation()}
+                    >
+                        {/* Close button */}
+                        <button
+                            onClick={() => setShowLoginModal(false)}
+                            className="absolute top-4 right-4 text-[10px] uppercase tracking-[0.2em] font-medium transition-colors duration-300 hover:text-[#C9A96E]"
+                            style={{ color: '#B5ADA3' }}
+                        >
+                            ✕
+                        </button>
+
+                        <span
+                            className="text-[10px] uppercase tracking-[0.24em] font-medium mb-4"
+                            style={{ color: '#C9A96E' }}
+                        >
+                            Login Required
+                        </span>
+
+                        <h2
+                            className="text-2xl sm:text-3xl font-light leading-snug mb-4"
+                            style={{ fontFamily: "'Cormorant Garamond', serif", color: '#1b1c1a' }}
+                        >
+                            Welcome to Snitch
+                        </h2>
+
+                        <p className="text-sm leading-relaxed mb-8" style={{ color: '#7A6E63' }}>
+                            Please login or register to view product details.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-3 w-full">
+                            <button
+                                onClick={() => {
+                                    setShowLoginModal(false);
+                                    navigate('/login');
+                                }}
+                                className="flex-1 py-3 text-[11px] uppercase tracking-[0.25em] font-medium transition-all duration-300"
+                                style={{
+                                    backgroundColor: '#1b1c1a',
+                                    color: '#fbf9f6',
+                                    fontFamily: "'Inter', sans-serif"
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.backgroundColor = '#C9A96E';
+                                    e.currentTarget.style.color = '#1b1c1a';
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.backgroundColor = '#1b1c1a';
+                                    e.currentTarget.style.color = '#fbf9f6';
+                                }}
+                            >
+                                Login
+                            </button>
+
+                            <button
+                                onClick={() => {
+                                    setShowLoginModal(false);
+                                    navigate('/register');
+                                }}
+                                className="flex-1 py-3 text-[11px] uppercase tracking-[0.25em] font-medium transition-all duration-300 border"
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    borderColor: '#d0c5b5',
+                                    color: '#1b1c1a',
+                                    fontFamily: "'Inter', sans-serif"
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.borderColor = '#C9A96E';
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.borderColor = '#d0c5b5';
+                                }}
+                            >
+                                Register
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 };
