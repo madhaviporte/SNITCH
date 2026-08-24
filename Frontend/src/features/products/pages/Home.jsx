@@ -29,7 +29,7 @@ const Home = () => {
             >
                
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
+                <div className="w-full px-4 sm:px-8 lg:px-16 xl:px-24">
                     {/* ── Hero / Header ── */}
                     <div className="pt-10 pb-10 sm:pt-16 sm:pb-16 md:pt-20 md:pb-20 text-center flex flex-col items-center">
                         <span className="text-[10px] uppercase tracking-[0.24em] font-medium mb-6" style={{ color: '#C9A96E' }}>
@@ -48,7 +48,7 @@ const Home = () => {
 
                     {/* ── Product Grid ── */}
                     {products && products.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16 pb-32">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-6 lg:gap-x-8 gap-y-12 lg:gap-y-16 pb-32">
                             {products.map(product => {
                                 const imageUrl = product.images && product.images.length > 0
                                     ? product.images[ 0 ].url
