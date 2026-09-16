@@ -113,7 +113,7 @@ export const googleCallback = async (req, res) => {
         sameSite: isProduction ? "none" : "lax"
     })
 
-    res.redirect("http://localhost:5173/")
+    res.redirect(config.CLIENT_URL + "/")
 }
 
 export const getMe = async (req, res) => {

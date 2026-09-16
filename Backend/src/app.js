@@ -15,10 +15,23 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+const allowedOrigins = config.NODE_ENV === "production"
+    ? ["https://cohort-2-mocha.vercel.app"]
+    : ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"];
+
 app.use(cors({
-    origin: ["http://localhost:5173",
-        "https://cohort-2-mocha.vercel.app",
-    ],
+    origin: function (origin, callback) {
+        // Allow requests with no origin (server-to-server, curl, mobile apps)
+        if (!origin) return callback(null, true);
+        // In development, allow any localhost port
+        if (config.NODE_ENV !== "production" && /^http:\/\/localhost:\d+$/.test(origin)) {
+            return callback(null, true);
+        }
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        callback(new Error("Not allowed by CORS"));
+    },
     methods: [ "GET", "POST", "PUT", "DELETE", "PATCH" ],
     credentials: true
 }))

@@ -76,27 +76,38 @@ const Cart = () => {
 
 
         const options = {
-            key: "rzp_test_SmU3qH6DSN2ZYF",
+            key: import.meta.env.VITE_RAZORPAY_KEY,
             amount: order.amount, // Amount in paise
             currency: order.currency,
             name: "Snitch",
             description: "Test Transaction",
             order_id: order.id, // Generate order_id on server
             handler: async (response) => {
+                try {
+                    const isValid = await handleVerifyCartOrder(response)
 
-                const isValid = await handleVerifyCartOrder(response)
-
-                if (isValid) {
-                    navigate(`/order-success?order_id=${response?.razorpay_order_id}`)
+                    if (isValid) {
+                        navigate(`/order-success?order_id=${response?.razorpay_order_id}`)
+                    } else {
+                        alert("Payment verification failed. Please contact support.")
+                    }
+                } catch (err) {
+                    console.error("Payment verification error:", err)
+                    alert("Payment verification failed. Please contact support.")
                 }
             },
             prefill: {
-                name: user?.fullname,
-                email: user?.email,
-                contact: user?.contact,
+                name: user?.fullname || "",
+                email: user?.email || "",
+                contact: user?.contact || "",
             },
             theme: {
                 color: tokens.primary,
+            },
+            modal: {
+                ondismiss: () => {
+                    console.log("Payment checkout dismissed by user")
+                },
             },
         };
 
